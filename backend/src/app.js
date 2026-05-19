@@ -20,6 +20,7 @@ const limiter = rateLimit({
 
 app.use(cors());
 app.use(helmet());
+app.set('trust proxy', 1);
 app.use(limiter);
 app.use(express.json({ limit: '5mb' }));
 app.use(morgan('dev'));
