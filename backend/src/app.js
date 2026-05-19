@@ -10,6 +10,7 @@ import reelRoutes from './routes/reelRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { getUploadsDir } from './services/storageService.js';
+import { ensureDbConnected } from './config/db.js';
 
 const app = express();
 
@@ -24,6 +25,15 @@ app.set('trust proxy', 1);
 app.use(limiter);
 app.use(express.json({ limit: '5mb' }));
 app.use(morgan('dev'));
+
+app.use(async (req, res, next) => {
+  try {
+    await ensureDbConnected();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
