@@ -41,6 +41,7 @@ const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(getUploadsDir()));
 
 app.use('/health', healthRoutes);
+app.use('/dbconnection', healthRoutes);
 app.use('/stories', storyRoutes);
 app.use('/reels', reelRoutes);
 

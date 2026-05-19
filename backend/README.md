@@ -25,7 +25,7 @@ npm run seed
 ## Endpoints
 
 - GET /health
-- GET /health/dbconnection
+- GET /dbconnection
 - GET /stories
 - POST /stories (multipart field: `media`)
 - GET /reels
